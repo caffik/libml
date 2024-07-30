@@ -1,16 +1,12 @@
 
 # libml
 
-This simple library implements classificator based on singular value decomposition (SVD). 
+This is a simple library that implements a classifier based on singular value decomposition (SVD).
 
 Features: 
 
 * A header-only library based on [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page). 
 * Computations are fast executed thanks to [BS::thread_pool](https://github.com/bshoshany/thread-pool).
-
-
-
-
 
 ## Installation
 
@@ -24,7 +20,7 @@ However, as mentioned above, the library depends on BS::thread_pool and Eigen. T
 
 ### Proposed method of installation.
 
-It is highly recomendent to use this library in your project using [CMake](https://cmake.org).  
+It is highly recommend to use this library in your project using [CMake](https://cmake.org).  
 
 Add the following contents to `CMakeLists.txt`: 
 
@@ -46,17 +42,13 @@ FetchContent_MakeAvailable(libml)
 ```
 and then link library by [`target_link_libraries`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html) command.
 
-
 ## CMake Options
 
-Available `CMake` options that can be use to configure:
+Available `CMake` options that can be used to configure:
 
 ```
 cmake -DML_ENABLE_TESTING=OFF
 ```
-
-
-
 
 ## Examples
 
