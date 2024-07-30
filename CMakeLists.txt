@@ -8,7 +8,7 @@ project(libml
 option(ML_ENABLE_TESTING "Enable testing of the mLearn library." OFF)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_BUILD_PARALLEL_LEVEL 4)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(scr)
 
