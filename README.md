@@ -6,8 +6,8 @@ Currently, it includes a classifier based on singular value decomposition (SVD).
 
 Features: 
 
-* A header-only library based on \[Eigen\](https://eigen.tuxfamily.org/index.php?title=Main_Page).
-* Computations are fast executed thanks to \[BS::thread\_pool\](https://github.com/bshoshany/thread-pool).
+* A header-only library based on [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page).
+* Computations are fast executed thanks to [BS::thread_pool](https://github.com/bshoshany/thread-pool).
 
 ## Installation
 
