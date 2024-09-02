@@ -14,7 +14,7 @@ namespace ml {
  *
  * @note For usage please see unit tests.
  */
-template <typename MatrixType, typename Allocator> class SVDPredict {
+template <typename MatrixType, typename Allocator> class SVDClassifier {
   static_assert(std::is_base_of_v<Eigen::MatrixBase<MatrixType>, MatrixType>,
                 "MatrixType is not derived class of Eigen::MatrixBase.");
 
@@ -29,34 +29,34 @@ public:
   template <typename S> using matrices_t = std::vector<matrix_t<S>>;
 
   /**
-   * Default constructor for SVDPredict.
+   * Default constructor for SVDClassifier.
    */
-  SVDPredict() = default;
+  SVDClassifier() = default;
 
   /**
    * Copy constructor is deleted.
    */
-  SVDPredict(const SVDPredict &) = delete;
+  SVDClassifier(const SVDClassifier &) = delete;
 
   /**
-   * Move constructor for SVDPredict.
+   * Move constructor for SVDClassifier.
    */
-  SVDPredict(SVDPredict &&) = default;
+  SVDClassifier(SVDClassifier &&) = default;
 
   /**
    * Copy assignment operator is deleted.
    */
-  SVDPredict &operator=(const SVDPredict &) = delete;
+  SVDClassifier &operator=(const SVDClassifier &) = delete;
 
   /**
-   * Move assignment operator for SVDPredict.
+   * Move assignment operator for SVDClassifier.
    */
-  SVDPredict &operator=(SVDPredict &&) = default;
+  SVDClassifier &operator=(SVDClassifier &&) = default;
 
   /**
-   * Default destructor for SVDPredict.
+   * Default destructor for SVDClassifier.
    */
-  ~SVDPredict() = default;
+  ~SVDClassifier() = default;
 
   /**
    * Copy constructor.
@@ -64,7 +64,7 @@ public:
    * @param data std::vector with matrices, each matrix contains data tagged
    * with a different label.
    */
-  explicit SVDPredict(const_reference_data_t data) : data_{data} {};
+  explicit SVDClassifier(const_reference_data_t data) : data_{data} {};
 
   /**
    * Move constructor.
@@ -72,7 +72,7 @@ public:
    * @param data std::vector with matrices, each matrix contains data tagged
    * with a different label.
    */
-  explicit SVDPredict(data_t &&data) : data_{std::move(data)} {};
+  explicit SVDClassifier(data_t &&data) : data_{std::move(data)} {};
 
   /**
    * Calculates right singular matrix for each matrix in matrices.

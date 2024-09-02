@@ -6,30 +6,30 @@ std::string address(const void *ptr) {
 }
 
 /*
- * Tests for the `SVDPredict` class.
+ * Tests for the `SVDClassifier` class.
  */
 
 /*
  * Tests for the constructors.
  */
 
-TEST(SVDPredict, DefaultConstructor) {
-  ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
+TEST(SVDClassifier, DefaultConstructor) {
+  ml::SVDClassifier<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
   EXPECT_TRUE(svd_predict.getData().empty());
 }
 
 // The following tests are intended to show flexibility in the data type.
 
-TEST(SVDPredict, CopyConstructorMatrix) {
+TEST(SVDClassifier, CopyConstructorMatrix) {
   const std::vector<Eigen::MatrixXd> data{Eigen::MatrixXd::Random(4, 4),
                                           Eigen::MatrixXd::Random(4, 4),
                                           Eigen::MatrixXd::Random(4, 4)};
 
-  ml::SVDPredict pred{data};
+  ml::SVDClassifier pred{data};
   ASSERT_TRUE(pred.getData() == data);
 }
 
-TEST(SVDPredict, CopyConstructorMap) {
+TEST(SVDClassifier, CopyConstructorMap) {
   std::vector<std::vector<double>> vec_data{{1, 2, 3, 4, 5, 6, 7, 8, 9},
                                             {1, 2, 3, 4, 5, 6, 7, 8, 9},
                                             {1, 2, 3, 4, 5, 6, 7, 8, 9}};
@@ -39,12 +39,12 @@ TEST(SVDPredict, CopyConstructorMap) {
     data.emplace_back(vec_data[i].data(), 3, 3);
   }
 
-  ml::SVDPredict pred{data};
+  ml::SVDClassifier pred{data};
 
   ASSERT_TRUE(pred.getData() == data);
 }
 
-TEST(SVDPredict, CopyConstructorBlock) {
+TEST(SVDClassifier, CopyConstructorBlock) {
   std::vector<Eigen::MatrixXd> data_matrices{Eigen::MatrixXd::Random(4, 4),
                                              Eigen::MatrixXd::Random(4, 4),
                                              Eigen::MatrixXd::Random(4, 4)};
@@ -54,18 +54,18 @@ TEST(SVDPredict, CopyConstructorBlock) {
     data.emplace_back(data_matrices[i].leftCols(2));
   }
 
-  ml::SVDPredict pred{data};
+  ml::SVDClassifier pred{data};
 
   ASSERT_TRUE(pred.getData() == data);
 }
 
 // Same applies for moveConstructor
 
-TEST(SVDPredict, MoveConstructor) {
+TEST(SVDClassifier, MoveConstructor) {
   std::vector<Eigen::MatrixXd> data{Eigen::MatrixXd::Random(3, 3)};
   const auto data_address{address(data.data())};
 
-  ml::SVDPredict svd_predict(std::move(data));
+  ml::SVDClassifier svd_predict(std::move(data));
 
   EXPECT_EQ(svd_predict.getData().size(), 1);
   EXPECT_TRUE(address(svd_predict.getData().data()) == data_address);
@@ -75,8 +75,8 @@ TEST(SVDPredict, MoveConstructor) {
  * Tests for the `fit` method.
  */
 
-TEST(SVDPredict, fit) {
-  ml::SVDPredict svd_predict{std::vector<Eigen::MatrixXd>{
+TEST(SVDClassifier, fit) {
+  ml::SVDClassifier svd_predict{std::vector<Eigen::MatrixXd>{
       Eigen::MatrixXd::Random(4, 30), Eigen::MatrixXd::Random(5, 30),
       Eigen::MatrixXd::Random(6, 30)}};
 
@@ -99,8 +99,8 @@ TEST(SVDPredict, fit) {
  * Tests for the `setData` method.
  */
 
-TEST(SVDPredict, SetData) {
-  ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
+TEST(SVDClassifier, SetData) {
+  ml::SVDClassifier<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
   std::vector<Eigen::MatrixXd> data{Eigen::MatrixXd::Random(3, 3)};
   svd_predict.setData(data);
   EXPECT_TRUE(svd_predict.getData() == data);
@@ -110,8 +110,8 @@ TEST(SVDPredict, SetData) {
  * Tests for the `setData` method with move semantics.
  */
 
-TEST(SVDPredict, SetDataMove) {
-  ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
+TEST(SVDClassifier, SetDataMove) {
+  ml::SVDClassifier<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
   std::vector<Eigen::MatrixXd> data{Eigen::MatrixXd::Random(4, 4), Eigen::MatrixXd::Random(4, 4),
                    Eigen::MatrixXd::Random(4, 4)};
   const auto expected_data_address{address(data.data())};
@@ -125,8 +125,8 @@ TEST(SVDPredict, SetDataMove) {
  * Tests for the `setUMatrices` method.
  */
 
-TEST(SVDPredict, SetUMatrices) {
-    ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
+TEST(SVDClassifier, SetUMatrices) {
+    ml::SVDClassifier<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
     std::vector<Eigen::MatrixXd> u_matrices{Eigen::MatrixXd::Random(3, 3)};
     svd_predict.setUMatrices(u_matrices);
     EXPECT_EQ(svd_predict.getUMatrices(), u_matrices);
@@ -136,8 +136,8 @@ TEST(SVDPredict, SetUMatrices) {
  * Tests for the `setUMatrices` method with move semantics.
  */
 
-TEST(SVDPredict, SetUMatricesMove) {
-    ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
+TEST(SVDClassifier, SetUMatricesMove) {
+    ml::SVDClassifier<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
     std::vector<Eigen::MatrixXd> u_matrices{Eigen::MatrixXd::Random(3, 3)};
     const auto expected_u_matrices_address{address(u_matrices.data())};
 
@@ -149,8 +149,8 @@ TEST(SVDPredict, SetUMatricesMove) {
  * Tests for the `fit_predict` method.
  */
 
-TEST(SVDPredict, fit_predict) {
-  ml::SVDPredict svd_predict{std::vector<Eigen::MatrixXd>{
+TEST(SVDClassifier, fit_predict) {
+  ml::SVDClassifier svd_predict{std::vector<Eigen::MatrixXd>{
       Eigen::MatrixXd::Random(4, 30), Eigen::MatrixXd::Random(4, 20),
       Eigen::MatrixXd::Random(4, 10)}};
 
