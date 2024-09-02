@@ -23,7 +23,7 @@ However, the library depends on `BS::thread_pool` and `Eigen3`. Therefore, these
 
 It is highly recommend to use this library in your project using [CMake](https://cmake.org).  
 
-Add the following contents to `CMakeLists.txt` (CMake 3.28 or later is required. ) : 
+Add the following contents to `CMakeLists.txt` (CMake 3.28 or later is required): 
 
 ```cmake
 # libml requires at least C++17
