@@ -5,6 +5,14 @@ std::string address(const void *ptr) {
   return std::to_string(reinterpret_cast<uintptr_t>(ptr));
 }
 
+/*
+ * Tests for the `SVDPredict` class.
+ */
+
+/*
+ * Tests for the constructors.
+ */
+
 TEST(SVDPredict, DefaultConstructor) {
   ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
   EXPECT_TRUE(svd_predict.getData().empty());
@@ -63,6 +71,10 @@ TEST(SVDPredict, MoveConstructor) {
   EXPECT_TRUE(address(svd_predict.getData().data()) == data_address);
 }
 
+/*
+ * Tests for the `fit` method.
+ */
+
 TEST(SVDPredict, fit) {
   ml::SVDPredict svd_predict{std::vector<Eigen::MatrixXd>{
       Eigen::MatrixXd::Random(4, 30), Eigen::MatrixXd::Random(5, 30),
@@ -83,12 +95,20 @@ TEST(SVDPredict, fit) {
   EXPECT_EQ(svd_predict.getUMatrices().size(), expected_u_matrices_size);
 }
 
+/*
+ * Tests for the `setData` method.
+ */
+
 TEST(SVDPredict, SetData) {
   ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
   std::vector<Eigen::MatrixXd> data{Eigen::MatrixXd::Random(3, 3)};
   svd_predict.setData(data);
   EXPECT_TRUE(svd_predict.getData() == data);
 }
+
+/*
+ * Tests for the `setData` method with move semantics.
+ */
 
 TEST(SVDPredict, SetDataMove) {
   ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
@@ -101,12 +121,20 @@ TEST(SVDPredict, SetDataMove) {
   EXPECT_TRUE(address(svd_predict.getData().data()) == expected_data_address);
 }
 
+/*
+ * Tests for the `setUMatrices` method.
+ */
+
 TEST(SVDPredict, SetUMatrices) {
     ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
     std::vector<Eigen::MatrixXd> u_matrices{Eigen::MatrixXd::Random(3, 3)};
     svd_predict.setUMatrices(u_matrices);
     EXPECT_EQ(svd_predict.getUMatrices(), u_matrices);
 }
+
+/*
+ * Tests for the `setUMatrices` method with move semantics.
+ */
 
 TEST(SVDPredict, SetUMatricesMove) {
     ml::SVDPredict<Eigen::MatrixXd, std::allocator<Eigen::MatrixXd>> svd_predict;
@@ -116,6 +144,10 @@ TEST(SVDPredict, SetUMatricesMove) {
     svd_predict.setUMatrices(std::move(u_matrices));
     EXPECT_TRUE(address(svd_predict.getUMatrices().data()) == expected_u_matrices_address);
 }
+
+/*
+ * Tests for the `fit_predict` method.
+ */
 
 TEST(SVDPredict, fit_predict) {
   ml::SVDPredict svd_predict{std::vector<Eigen::MatrixXd>{
