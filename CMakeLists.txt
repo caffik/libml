@@ -16,6 +16,8 @@ project(libml
         LANGUAGES CXX
 )
 
+message(STATUS "Configuring libml 1.0.0")
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -29,51 +31,50 @@ include(FetchContent)
 #   Eigen   #
 #############
 
-find_package(Eigen3 3.4.0 QUIET)
-
-if (NOT Eigen3_FOUND)
-    message(STATUS "Eigen3 not found. Fetching Eigen3...")
-
-    FetchContent_Declare(
-        Eigen
-        GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
-        GIT_TAG master
-        GIT_SHALLOW TRUE
-        GIT_PROGRESS TRUE
-    )
-
-    set(BUILD_TESTING OFF)
-    set(EIGEN_BUILD_TESTING OFF)
-    set(EIGEN_MPL2_ONLY ON)
-    set(EIGEN_BUILD_PKGCONFIG OFF)
-    set(EIGEN_BUILD_DOC OFF)
-    FetchContent_MakeAvailable(Eigen)
-endif ()
+FetchContent_Declare(Eigen
+    GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
+    GIT_TAG master
+    GIT_SHALLOW TRUE
+    GIT_PROGRESS TRUE
+    FIND_PACKAGE_ARGS 3.4.0
+)
+set(BUILD_TESTING OFF)
+set(EIGEN_BUILD_TESTING OFF)
+set(EIGEN_MPL2_ONLY ON)
+set(EIGEN_BUILD_PKGCONFIG OFF)
+set(EIGEN_BUILD_DOC OFF)
+FetchContent_MakeAvailable(Eigen)
 
 ###################
 #   thread-pool   #
 ###################
 
-message(STATUS "Fetching thread-pool...")
+    ####################
+    #   Download CPM   #
+    ####################
+
 set(CPM_DOWNLOAD_LOCATION
         "${libml_BINARY_DIR}/cmake/CPM.cmake"
 )
+
 if(NOT(EXISTS ${CPM_DOWNLOAD_LOCATION}))
     message(STATUS "Downloading CPM.cmake")
     file(DOWNLOAD
             https://github.com/cpm-cmake/CPM.cmake/releases/latest/download/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
 endif()
 
+####
 include(${CPM_DOWNLOAD_LOCATION})
 
 CPMAddPackage(
-        NAME BS_thread_pool
-        GITHUB_REPOSITORY bshoshany/thread-pool
-        VERSION 4.1.0)
+    NAME BS_thread_pool
+    GITHUB_REPOSITORY bshoshany/thread-pool
+    VERSION 4.1.0
+)
 
 add_library(BS_thread_pool INTERFACE)
 target_include_directories(BS_thread_pool
-        INTERFACE
+    INTERFACE
         ${BS_thread_pool_SOURCE_DIR}/include
 )
 
@@ -119,3 +120,5 @@ endif()
 if (ENABLE_DOCS)
     add_subdirectory(docs)
 endif()
+
+message(STATUS "Configured libml 1.0.0")

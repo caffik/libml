@@ -1,3 +1,5 @@
+message(STATUS "libml: Configuring tests...")
+
 include(FetchContent)
 
 ##################
@@ -6,23 +8,17 @@ include(FetchContent)
 
 enable_testing()
 
-find_package(GTest 1.14.0
-        QUIET
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest
+    GIT_TAG v1.14.0
+    FIND_PACKAGE_ARGS NAMES GTest
 )
 
-if (NOT GTest_FOUND)
-    message(STATUS "Google Test not found. Fetching Google Test...")
+set(BUILD_GMOCK OFF)
 
-    FetchContent_Declare(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest
-        GIT_TAG v1.14.0
-    )
-
-    set(BUILD_GMOCK OFF)
-    FetchContent_MakeAvailable(googletest)
-    include(GoogleTest)
-endif ()
+FetchContent_MakeAvailable(googletest)
+include(GoogleTest)
 
 #################
 #   Set Tests   #
@@ -30,7 +26,7 @@ endif ()
 
 add_executable(Tests
     test.svd_classifier.cpp
-        test.projection.cpp
+    test.projection.cpp
 )
 
 target_link_libraries(Tests

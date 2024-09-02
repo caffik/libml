@@ -1,3 +1,5 @@
+message(STATUS "libml: Configuring and building documentation...")
+
 find_package(Doxygen)
 
 if (DOXYGEN_FOUND)
