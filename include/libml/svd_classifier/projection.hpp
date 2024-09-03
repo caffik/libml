@@ -1,7 +1,8 @@
 #ifndef PROJECTION_HPP
 #define PROJECTION_HPP
 
-#include <Eigen/Eigen>
+#include <Eigen/Core>
+#include <Eigen/SVD>
 #include <vector>
 
 #include "BS_thread_pool.hpp"
