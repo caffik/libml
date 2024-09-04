@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <libml/svd_classifier/svd_classifier.hpp>
+#include <libml/svd_classification/svd_classifier.hpp>
 
 std::string address(const void *ptr) {
   return std::to_string(reinterpret_cast<uintptr_t>(ptr));

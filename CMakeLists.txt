@@ -86,25 +86,25 @@ set(INCLUDE_DIR
         ${PROJECT_SOURCE_DIR}/include
 )
 
-#############################
-#   libml::svd_classifier   #
-#############################
+#################################
+#   libml::svd_classification   #
+#################################
 
 set(INCLUDE_DIR_SVD_CLASSIFIER
-        ${INCLUDE_DIR}/libml/svd_classifier
+        ${INCLUDE_DIR}/libml/svd_classification
 )
 
-add_library(libml_svd_classifier INTERFACE)
-add_library(libml::svd_classifier ALIAS libml_svd_classifier)
+add_library(libml_svd_classification INTERFACE)
+add_library(libml::svd_classification ALIAS libml_svd_classification)
 
-target_link_libraries(libml_svd_classifier
+target_link_libraries(libml_svd_classification
         INTERFACE
         Eigen3::Eigen
         BS_thread_pool
 )
 
 target_include_directories(
-    libml_svd_classifier
+    libml_svd_classification
         INTERFACE
             $<BUILD_INTERFACE:${INCLUDE_DIR}>
 )

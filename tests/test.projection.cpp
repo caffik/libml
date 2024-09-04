@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <libml/svd_classifier/projection.hpp>
+#include <libml/svd_classification/projection.hpp>
 
 /*
  * The following tests are for the `projection` function in `svd_classifier.hpp`.

@@ -32,7 +32,7 @@ add_executable(Tests
 target_link_libraries(Tests
     PRIVATE
         GTest::gtest_main
-        libml::svd_classifier
+        libml::svd_classification
 )
 
 gtest_add_tests(TARGET Tests)
