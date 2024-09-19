@@ -84,20 +84,21 @@ This example demonstrates how to use the `projection` function.
 #include <iostream>
 #include <Eigen/Core>
 #include "libml/utils/projection.hpp
-  int main() {
-    // Example matrices
-    Eigen::MatrixXd from(3, 2);
-    from << 1, 2,
-            3, 4,
-            5, 6;
-  
-    Eigen::MatrixXd onto(3, 2);
-    onto << 1, 0,
-            0, 1,
-            0, 0;
-  
-    Eigen::MatrixXd result = ml::projection(from, onto);
-    std::cout << "Projection result:\n" << result << std::endl;
+
+int main() {
+  // Example matrices
+  Eigen::MatrixXd from(3, 2);
+  from << 1, 2,
+          3, 4,
+          5, 6;
+
+  Eigen::MatrixXd onto(3, 2);
+  onto << 1, 0,
+          0, 1,
+          0, 0;
+
+  Eigen::MatrixXd result = ml::projection(from, onto);
+  std::cout << "Projection result:\n" << result << std::endl;
 ``` 
 This example demonstrates how to use the SVDClassifier class.
 
