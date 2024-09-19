@@ -83,7 +83,7 @@ This example demonstrates how to use the `projection` function.
 ```cpp
 #include <iostream>
 #include <Eigen/Core>
-#include "libml/utils/projection.hpp
+#include "libml/utils/projection.hpp"
 
 int main() {
   // Example matrices
@@ -99,6 +99,8 @@ int main() {
 
   Eigen::MatrixXd result = ml::projection(from, onto);
   std::cout << "Projection result:\n" << result << std::endl;
+  return 0;
+}
 ``` 
 This example demonstrates how to use the SVDClassifier class.
 
